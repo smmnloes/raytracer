@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
 
     @Override
@@ -26,14 +27,16 @@ public class Main extends Application {
         primaryStage.show();
 
         renderTestScene(viewPort);
+
     }
 
     private void renderTestScene(ViewPort viewPort) {
         SceneData sceneData = new SceneData();
         sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
-        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 1, new Material());
+        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material());
         sceneData.geometries.add(sphere);
         Raytracer raytracer = new Raytracer(sceneData);
+
         viewPort.drawImage(raytracer.render());
     }
 

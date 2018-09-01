@@ -61,7 +61,7 @@ public class Raytracer {
 
 
     private int shade(Intersection intersection) {
-        return 1;
+        return 0xFFFFFFFF;
     }
 
 

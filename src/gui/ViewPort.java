@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
@@ -13,9 +14,10 @@ public class ViewPort extends ImageView {
         WritableImage writableImage = new WritableImage(width, height);
         PixelWriter pixelWriter = writableImage.getPixelWriter();
 
+
         for (int x = 0; x < width; x++) {
-            for (int y = 0; y < width; y++) {
-                pixelWriter.setArgb(x, y, imageBuffer[x][y]);
+            for (int y = 0; y < height; y++) {
+                pixelWriter.setArgb(x, y, imageBuffer[y][x] | 0xFF000000);
             }
         }
 
