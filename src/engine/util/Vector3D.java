@@ -13,16 +13,30 @@ public class Vector3D {
         return new Vector3D(a.x - b.x, a.y - b.y, a.z - b.z);
     }
 
-    public static Vector3D normalize(Vector3D v) {
-        double length = length(v);
-        return new Vector3D(v.x / length, v.y / length, v.z / length);
+    public Vector3D plus(Vector3D b) {
+        return new Vector3D(this.x + b.x, this.y + b.y, this.z + b.z);
+    }
+
+    public void normalize() {
+        double length = length(this);
+        this.x /= length;
+        this.y /= length;
+        this.z /= length;
     }
 
     public static double length(Vector3D v) {
-        return  Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2) + Math.pow(v.z, 2));
+        return Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2) + Math.pow(v.z, 2));
     }
 
-    public static double distance (Vector3D a, Vector3D b) {
+    public static double distance(Vector3D a, Vector3D b) {
         return length(minus(b, a));
+    }
+
+    public double dotProduct(Vector3D b) {
+        return (this.x * b.x + this.y * b.y + this.z * b.z);
+    }
+
+    public Vector3D times(double scalar) {
+        return new Vector3D(this.x * scalar, this.y * scalar, this.z * scalar);
     }
 }
