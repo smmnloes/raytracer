@@ -33,8 +33,8 @@ public class Main extends Application {
     private void renderTestScene(ViewPort viewPort) {
         SceneData sceneData = new SceneData();
         sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
-        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material(new RGBColor(1,0,0)));
-        Light light = new PointLight(new Vector3D(-3, 10, 2), 2, new RGBColor(1,1,1));
+        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material(new RGBColor(1,1,1)));
+        Light light = new PointLight(new Vector3D(-3, 5, -2), 500, new RGBColor(0.5,1,1));
         sceneData.lights.add(light);
         sceneData.geometries.add(sphere);
         Raytracer raytracer = new Raytracer(sceneData);

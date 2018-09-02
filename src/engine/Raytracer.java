@@ -14,7 +14,7 @@ public class Raytracer {
 
     private final SceneData sceneData;
 
-    private final RGBColor BACKGROUND_COLOR = new RGBColor(0, 0, 0);
+    private final RGBColor BACKGROUND_COLOR = new RGBColor(0.5, 0.5, 0.5);
 
     public Raytracer(SceneData sceneData) {
         this.sceneData = sceneData;
@@ -61,8 +61,7 @@ public class Raytracer {
             Intersection intersection = geometry.intersects(ray);
 
             if (intersection != null) {
-                // TODO: use t directly
-                double distance = intersection.hitPoint.distance(sceneData.camera.position);
+                double distance = intersection.t;
                 if (distance < closestDistance) {
                     closestDistance = distance;
                     closestIntersection = intersection;
@@ -70,22 +69,23 @@ public class Raytracer {
             }
 
         }
-        return shade(closestIntersection);
+        return shade(closestIntersection, ray);
     }
 
 
-    private RGBColor shade(Intersection intersection) {
+    private RGBColor shade(Intersection intersection, Ray ray) {
         if (intersection == null) {
             return BACKGROUND_COLOR;
         } else {
             Light light = sceneData.lights.get(0);
-            Vector3D hitPoint = intersection.hitPoint;
-            Vector3D normal = intersection.geometry.getNormal(intersection.hitPoint);
-            Vector3D L = light.getDirection(hitPoint).negate();
+            Vector3D hitPoint = sceneData.camera.position.plus(ray.direction.times(intersection.t));
+            Vector3D normal = intersection.geometry.getNormal(hitPoint);
+            Vector3D L = light.getDirection(hitPoint);
+
             return intersection.geometry.material.color
-                    .divideBy(light.getIntensity(hitPoint))
-                            .times(Math.PI)
-                            .times(Math.max(0.d, normal.dotProduct(L)));
+                    .divideBy(Math.PI)
+                    .times(light.getIntensity(hitPoint))
+                    .times(Math.max(0.d, normal.dotProduct(L)));
         }
     }
 

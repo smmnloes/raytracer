@@ -17,15 +17,19 @@ public class RGBColor {
     }
 
     public RGBColor times(double scalar) {
-        return new RGBColor((int) (this.red * scalar), (int) (this.green * scalar), (int) (this.blue * scalar));
+        return new RGBColor(this.red * scalar, this.green * scalar, this.blue * scalar);
     }
 
     public RGBColor times(RGBColor c) {
-        return new RGBColor((int) (this.red * c.red), (int) (this.green * c.green), (int) (this.blue * c.blue));
+        return new RGBColor(this.red * c.red, this.green * c.green, this.blue * c.blue);
     }
 
     public RGBColor divideBy(RGBColor c) {
-        return new RGBColor((int) (this.red / c.red), (int) (this.green / c.green), (int) (this.blue / c.blue));
+        return new RGBColor(this.red / c.red, this.green / c.green, this.blue / c.blue);
+    }
+
+    public RGBColor divideBy(double scalar) {
+        return new RGBColor(this.red / scalar, this.green / scalar, this.blue / scalar);
     }
 
 }

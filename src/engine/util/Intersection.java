@@ -4,10 +4,10 @@ import engine.models.components.Geometry;
 
 public class Intersection {
     public Geometry geometry;
-    public Vector3D hitPoint;
+    public double t;
 
-    public Intersection(Geometry geometry, Vector3D hitPoint) {
+    public Intersection(Geometry geometry, double t) {
         this.geometry = geometry;
-        this.hitPoint = hitPoint;
+        this.t = t;
     }
 }

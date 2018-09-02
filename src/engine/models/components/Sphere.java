@@ -42,7 +42,7 @@ public class Sphere extends Geometry {
             if (t0 < 0) return null; // both t0 and t1 are negative
         }
 
-        return new Intersection(this, ray.origin.plus(ray.direction.times(t0)));
+        return new Intersection(this, t0);
     }
 
 
