@@ -1,22 +1,19 @@
 package engine;
 
 import engine.models.SceneData;
-import engine.models.components.Geometry;
+import engine.models.components.geometry.Geometry;
 import engine.models.components.lights.Light;
-import engine.util.Intersection;
-import engine.util.RGBColor;
-import engine.util.Ray;
-import engine.util.Vector3D;
+import engine.util.*;
 
-public class Raytracer {
-    private static final int IMAGE_HEIGHT = 1000;
-    private static final int IMAGE_WIDTH = 1000;
+public class RayTracer {
+    private static final int IMAGE_HEIGHT = Options.IMAGE_HEIGHT;
+    private static final int IMAGE_WIDTH = Options.IMAGE_WIDTH;
 
     private final SceneData sceneData;
 
-    private final RGBColor BACKGROUND_COLOR = new RGBColor(0.5, 0.5, 0.5);
+    private final RGBColor BACKGROUND_COLOR = Options.BACKGROUND_COLOR;
 
-    public Raytracer(SceneData sceneData) {
+    public RayTracer(SceneData sceneData) {
         this.sceneData = sceneData;
     }
 
@@ -80,7 +77,7 @@ public class Raytracer {
             Vector3D hitPoint = sceneData.camera.position.plus(ray.direction.times(intersection.t));
             Vector3D normal = intersection.geometry.getNormal(hitPoint);
 
-            RGBColor finalColor = new RGBColor(0, 0, 0);
+            RGBColor finalColor = RGBColor.black();
 
             for (Light light : sceneData.lights) {
                 Vector3D L = light.getDirection(hitPoint).negate();

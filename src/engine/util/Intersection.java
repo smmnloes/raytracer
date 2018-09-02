@@ -1,6 +1,6 @@
 package engine.util;
 
-import engine.models.components.Geometry;
+import engine.models.components.geometry.Geometry;
 
 public class Intersection {
     public Geometry geometry;

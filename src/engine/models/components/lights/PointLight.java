@@ -16,7 +16,7 @@ public class PointLight extends Light {
     public RGBColor getIntensity(Vector3D point) {
         Vector3D direction = point.minus(position);
         double distance = direction.length();
-        double sqFalloff = 1.0 / (4.0 * Math.PI * Math.pow(distance, 2));
+        double sqFalloff = 1.0 / (4.0 * Math.PI * (distance * distance));
         return this.color.times(intensity).times(sqFalloff);
     }
 

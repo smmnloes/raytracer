@@ -1,5 +1,6 @@
-package engine.models.components;
+package engine.models.components.geometry;
 
+import engine.models.components.Material;
 import engine.util.Intersection;
 import engine.util.Ray;
 import engine.util.Vector3D;
@@ -21,7 +22,7 @@ public class Sphere extends Geometry {
         Vector3D L = ray.origin.minus(position);
         double a = ray.direction.dotProduct(ray.direction);
         double b = 2 * ray.direction.dotProduct(L);
-        double c = L.dotProduct(L) - Math.pow(radius, 2);
+        double c = L.dotProduct(L) - (radius * radius);
         double[] quadraticSolution = solveQuadratic(a, b, c);
         if (quadraticSolution == null) {
             return null;

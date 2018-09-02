@@ -26,11 +26,7 @@ public class Vector3D {
     }
 
     public double length() {
-        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
-    }
-
-    public double distance(Vector3D b) {
-        return this.minus(b).length();
+        return Math.sqrt((x*x) + (y*y) + (z*z));
     }
 
     public double dotProduct(Vector3D b) {

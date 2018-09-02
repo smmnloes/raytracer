@@ -36,4 +36,27 @@ public class RGBColor {
         return new RGBColor(this.red + c.red, this.blue + c.blue, this.green + c.green);
     }
 
+    public static RGBColor black() {
+        return new RGBColor(0, 0, 0);
+    }
+
+    public static RGBColor grey() {
+        return new RGBColor(0.5, 0.5, 0.5);
+    }
+
+    public static RGBColor white() {
+        return new RGBColor(1, 1, 1);
+    }
+
+    public static RGBColor red() {
+        return new RGBColor(1, 0, 0);
+    }
+
+    public static RGBColor green() {
+        return new RGBColor(0, 1, 0);
+    }
+
+    public static RGBColor blue() {
+        return new RGBColor(0, 0, 1);
+    }
 }

@@ -1,5 +1,6 @@
-package engine.models.components;
+package engine.models.components.geometry;
 
+import engine.models.components.Material;
 import engine.util.Intersection;
 import engine.util.Ray;
 import engine.util.Vector3D;

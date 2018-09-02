@@ -1,2 +1,2 @@
-# raytracer
-Mutlithreading enabled raytracer
+# rayTracer
+Mutlithreading enabled rayTracer
