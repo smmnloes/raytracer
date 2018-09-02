@@ -77,15 +77,20 @@ public class Raytracer {
         if (intersection == null) {
             return BACKGROUND_COLOR;
         } else {
-            Light light = sceneData.lights.get(0);
             Vector3D hitPoint = sceneData.camera.position.plus(ray.direction.times(intersection.t));
             Vector3D normal = intersection.geometry.getNormal(hitPoint);
-            Vector3D L = light.getDirection(hitPoint).negate();
 
-            return intersection.geometry.material.color
-                    .divideBy(Math.PI)
-                    .times(light.getIntensity(hitPoint))
-                    .times(Math.max(0.d, normal.dotProduct(L)));
+            RGBColor finalColor = new RGBColor(0, 0, 0);
+
+            for (Light light : sceneData.lights) {
+                Vector3D L = light.getDirection(hitPoint).negate();
+                finalColor = finalColor.add(intersection.geometry.material.color
+                        .divideBy(Math.PI)
+                        .times(light.getIntensity(hitPoint))
+                        .times(Math.max(0.d, normal.dotProduct(L))));
+            }
+
+            return finalColor;
         }
     }
 

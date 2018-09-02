@@ -5,6 +5,7 @@ import engine.models.SceneData;
 import engine.models.components.*;
 import engine.models.components.lights.DirectionalLight;
 import engine.models.components.lights.Light;
+import engine.models.components.lights.PointLight;
 import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
@@ -35,12 +36,13 @@ public class Main extends Application {
     private void renderTestScene(ViewPort viewPort) {
         SceneData sceneData = new SceneData();
         sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
-        Sphere sphere = new Sphere(new Vector3D(-200, 0, -500), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 20, new Material(new RGBColor(1, 1, 1)));
-        Sphere sphere2 = new Sphere(new Vector3D(30, 0, -100), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 30, new Material(new RGBColor(1, 1, 1)));
+        Sphere sphere = new Sphere(new Vector3D(-5, 0, -15), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material(new RGBColor(1, 1, 1)));
+        Sphere sphere2 = new Sphere(new Vector3D(2, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(new RGBColor(1, 1, 1)));
 
-        //Light light = new PointLight(new Vector3D(-3, 5, -2), 1000, new RGBColor(0.5,1,1));
-        Light light = new DirectionalLight(null, 2, new RGBColor(1, 1, 1), new Vector3D(0.5, -0.5, -0.5));
+        Light light = new PointLight(new Vector3D(3, 5, -2), 1000, new RGBColor(1,0,0));
+        Light light2 = new DirectionalLight(null, 2, new RGBColor(1, 1, 1), new Vector3D(0.5, -0.5, -0.5));
         sceneData.lights.add(light);
+        sceneData.lights.add(light2);
         sceneData.geometries.add(sphere);
         sceneData.geometries.add(sphere2);
         Raytracer raytracer = new Raytracer(sceneData);

@@ -32,4 +32,8 @@ public class RGBColor {
         return new RGBColor(this.red / scalar, this.green / scalar, this.blue / scalar);
     }
 
+    public RGBColor add(RGBColor c) {
+        return new RGBColor(this.red + c.red, this.blue + c.blue, this.green + c.green);
+    }
+
 }
