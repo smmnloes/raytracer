@@ -1,4 +1,4 @@
-package engine.models.components;
+package engine.models.components.lights;
 
 import engine.util.RGBColor;
 import engine.util.Vector3D;

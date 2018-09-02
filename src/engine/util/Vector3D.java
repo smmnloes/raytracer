@@ -42,9 +42,6 @@ public class Vector3D {
     }
 
     public Vector3D negate() {
-        x = -x;
-        y = -y;
-        z = -z;
-        return this;
+        return new Vector3D(-x, -y, - z);
     }
 }

@@ -2,7 +2,7 @@ package engine;
 
 import engine.models.SceneData;
 import engine.models.components.Geometry;
-import engine.models.components.Light;
+import engine.models.components.lights.Light;
 import engine.util.Intersection;
 import engine.util.RGBColor;
 import engine.util.Ray;
@@ -32,7 +32,7 @@ public class Raytracer {
 
                 double Px, Py;
 
-                if (IMAGE_WIDTH > IMAGE_HEIGHT) {
+                if (IMAGE_WIDTH >= IMAGE_HEIGHT) {
                     double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width > height
                     Px = (2 * ((x + 0.5) / IMAGE_WIDTH) - 1) * scale * imageAspectRatio;
                     Py = (1 - 2 * ((y + 0.5) / IMAGE_HEIGHT) * scale);
@@ -80,7 +80,7 @@ public class Raytracer {
             Light light = sceneData.lights.get(0);
             Vector3D hitPoint = sceneData.camera.position.plus(ray.direction.times(intersection.t));
             Vector3D normal = intersection.geometry.getNormal(hitPoint);
-            Vector3D L = light.getDirection(hitPoint);
+            Vector3D L = light.getDirection(hitPoint).negate();
 
             return intersection.geometry.material.color
                     .divideBy(Math.PI)
