@@ -17,7 +17,7 @@ public class ViewPort extends ImageView {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                pixelWriter.setArgb(x, y, imageBuffer[y][x] | 0xFF000000);
+                pixelWriter.setArgb(x, y, imageBuffer[y][x]);
             }
         }
 

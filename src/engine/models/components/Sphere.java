@@ -18,7 +18,7 @@ public class Sphere extends Geometry {
         double t0, t1;
 
         // analytic solution
-        Vector3D L = Vector3D.minus(ray.origin, this.position);
+        Vector3D L = ray.origin.minus(position);
         double a = ray.direction.dotProduct(ray.direction);
         double b = 2 * ray.direction.dotProduct(L);
         double c = L.dotProduct(L) - Math.pow(radius, 2);
@@ -61,5 +61,9 @@ public class Sphere extends Geometry {
             double x1 = c / q;
             return (x0 > x1) ? new double[]{x1, x0} : new double[]{x0, x1};
         }
+    }
+
+    public Vector3D getNormal(Vector3D hitPoint) {
+        return hitPoint.minus(position).normalize();
     }
 }

@@ -2,9 +2,8 @@ package gui;
 
 import engine.Raytracer;
 import engine.models.SceneData;
-import engine.models.components.Camera;
-import engine.models.components.Material;
-import engine.models.components.Sphere;
+import engine.models.components.*;
+import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -27,13 +26,16 @@ public class Main extends Application {
         primaryStage.show();
 
         renderTestScene(viewPort);
-
+        primaryStage.setHeight(1000);
+        primaryStage.setWidth(1000);
     }
 
     private void renderTestScene(ViewPort viewPort) {
         SceneData sceneData = new SceneData();
         sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
-        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material());
+        Sphere sphere = new Sphere(new Vector3D(0, 0, -10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 5, new Material(new RGBColor(1,0,0)));
+        Light light = new PointLight(new Vector3D(-3, 10, 2), 2, new RGBColor(1,1,1));
+        sceneData.lights.add(light);
         sceneData.geometries.add(sphere);
         Raytracer raytracer = new Raytracer(sceneData);
 

@@ -2,17 +2,19 @@ package engine;
 
 import engine.models.SceneData;
 import engine.models.components.Geometry;
+import engine.models.components.Light;
 import engine.util.Intersection;
+import engine.util.RGBColor;
 import engine.util.Ray;
 import engine.util.Vector3D;
 
 public class Raytracer {
-    private static final int IMAGE_HEIGHT = 500;
+    private static final int IMAGE_HEIGHT = 1000;
     private static final int IMAGE_WIDTH = 1000;
 
     private final SceneData sceneData;
 
-    private final int BACKGROUND_COLOR = 0;
+    private final RGBColor BACKGROUND_COLOR = new RGBColor(0, 0, 0);
 
     public Raytracer(SceneData sceneData) {
         this.sceneData = sceneData;
@@ -42,16 +44,16 @@ public class Raytracer {
 
                 // TODO: add support for camera movement
                 Vector3D rayOrigin = new Vector3D(0, 0, 0);
-                Vector3D rayDirection = Vector3D.minus(new Vector3D(Px, Py, -1), rayOrigin); // note that this just equal to Vec3f(Px, Py, -1);
+                Vector3D rayDirection = new Vector3D(Px, Py, -1).minus(rayOrigin); // note that this just equal to Vec3f(Px, Py, -1);
                 rayDirection.normalize(); // it's a rotation so don't forget to normalize
 
-                imageBuffer[y][x] = trace(new Ray(rayOrigin, rayDirection));
+                imageBuffer[y][x] = trace(new Ray(rayOrigin, rayDirection)).toInt();
             }
         }
         return imageBuffer;
     }
 
-    private int trace(Ray ray) {
+    private RGBColor trace(Ray ray) {
         double closestDistance = Double.MAX_VALUE;
         Intersection closestIntersection = null;
 
@@ -59,7 +61,8 @@ public class Raytracer {
             Intersection intersection = geometry.intersects(ray);
 
             if (intersection != null) {
-                double distance = Vector3D.distance(intersection.hitPoint, sceneData.camera.position);
+                // TODO: use t directly
+                double distance = intersection.hitPoint.distance(sceneData.camera.position);
                 if (distance < closestDistance) {
                     closestDistance = distance;
                     closestIntersection = intersection;
@@ -67,12 +70,23 @@ public class Raytracer {
             }
 
         }
-        return closestIntersection == null ? BACKGROUND_COLOR : shade(closestIntersection);
+        return shade(closestIntersection);
     }
 
 
-    private int shade(Intersection intersection) {
-        return 0xFFFFFFFF;
+    private RGBColor shade(Intersection intersection) {
+        if (intersection == null) {
+            return BACKGROUND_COLOR;
+        } else {
+            Light light = sceneData.lights.get(0);
+            Vector3D hitPoint = intersection.hitPoint;
+            Vector3D normal = intersection.geometry.getNormal(intersection.hitPoint);
+            Vector3D L = light.getDirection(hitPoint).negate();
+            return intersection.geometry.material.color
+                    .divideBy(light.getIntensity(hitPoint))
+                            .times(Math.PI)
+                            .times(Math.max(0.d, normal.dotProduct(L)));
+        }
     }
 
 

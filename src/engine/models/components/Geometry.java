@@ -6,7 +6,7 @@ import engine.util.Vector3D;
 
 public abstract class Geometry {
     public Vector3D position, rotation, scale;
-    private Material material;
+    public Material material;
 
     public Geometry(Vector3D position, Vector3D rotation, Vector3D scale, Material material) {
         this.position = position;
@@ -16,4 +16,6 @@ public abstract class Geometry {
     }
 
     public abstract Intersection intersects(Ray ray);
+
+    public abstract Vector3D getNormal(Vector3D hitPoint);
 }

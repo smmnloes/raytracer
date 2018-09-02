@@ -1,13 +1,20 @@
 package engine.models.components;
 
+import engine.util.RGBColor;
+import engine.util.Vector3D;
+
 public abstract class Light {
-    double x,y,z;
-}
+    public Vector3D position;
+    public double intensity;
+    public RGBColor color;
 
-class PointLight extends Light {
+    public Light(Vector3D position, double intensity, RGBColor color) {
+        this.position = position;
+        this.intensity = intensity;
+        this.color = color;
+    }
 
-}
+    public abstract Vector3D getDirection(Vector3D point);
 
-class SpotLight extends Light {
-
+    public abstract RGBColor getIntensity(Vector3D point);
 }
