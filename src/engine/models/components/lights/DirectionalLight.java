@@ -4,7 +4,8 @@ import engine.util.RGBColor;
 import engine.util.Vector3D;
 
 public class DirectionalLight extends Light {
-    Vector3D direction;
+    public Vector3D direction;
+    private static final int INTENSITY_MUTLIPLIER = 5;
 
     public DirectionalLight(Vector3D position, double intensity, RGBColor color, Vector3D direction) {
         super(position, intensity, color);
@@ -16,7 +17,7 @@ public class DirectionalLight extends Light {
     }
 
     public RGBColor getIntensity(Vector3D point) {
-        return this.color.times(intensity);
+        return this.color.times(intensity * INTENSITY_MUTLIPLIER);
     }
 
 }

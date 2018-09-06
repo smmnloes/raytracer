@@ -5,6 +5,8 @@ import engine.util.RGBColor;
 import engine.util.Vector3D;
 
 public class PointLight extends Light {
+    private static final int INTENSITY_MUTLIPLIER = 1000;
+
     public PointLight(Vector3D position, double intensity, RGBColor color) {
         super(position, intensity, color);
     }
@@ -17,7 +19,7 @@ public class PointLight extends Light {
         Vector3D direction = point.minus(position);
         double distance = direction.length();
         double sqFalloff = 1.0 / (4.0 * Math.PI * (distance * distance));
-        return this.color.times(intensity).times(sqFalloff);
+        return this.color.times(intensity * INTENSITY_MUTLIPLIER).times(sqFalloff);
     }
 
 }

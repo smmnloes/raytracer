@@ -61,17 +61,16 @@ public class Main extends Application {
 
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
-        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 120);
-        Sphere sphere = new Sphere(new Vector3D(-10, 0, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
-        Sphere sphere2 = new Sphere(new Vector3D(2, 0, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
+        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
+        Sphere sphere = new Sphere(new Vector3D(-10, 2, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
+        Sphere sphere2 = new Sphere(new Vector3D(2, 1, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
 
-        Light light = new PointLight(new Vector3D(-1, 7, 10), 500, RGBColor.red());
-        Light light2 = new DirectionalLight(null, 2, RGBColor.white(), new Vector3D(0.5, -0.5, 0.5));
+        Light light = new PointLight(new Vector3D(-1, 7, 10), 0.5, RGBColor.red());
+        Light light2 = new DirectionalLight(null, 0.5, RGBColor.white(), new Vector3D(0.5, -0.5, 0.5));
         sceneData.lights.add(light);
         sceneData.lights.add(light2);
         sceneData.geometries.add(sphere);
         sceneData.geometries.add(sphere2);
-
         return sceneData;
 
     }

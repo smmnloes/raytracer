@@ -29,6 +29,7 @@ public class RayTracer {
 
                 double Px, Py;
 
+                // invert Py because in viewport y axis points down
                 if (IMAGE_WIDTH >= IMAGE_HEIGHT) {
                     double imageAspectRatio =  (double)IMAGE_WIDTH / (double)IMAGE_HEIGHT; // assuming width > height
                     Px = (2d * (x + 0.5d) / (double)IMAGE_WIDTH - 1d) * scale * imageAspectRatio;
