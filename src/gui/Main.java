@@ -40,16 +40,12 @@ public class Main extends Application {
         renderStage.setHeight(Options.IMAGE_HEIGHT);
         renderStage.setWidth(Options.IMAGE_WIDTH);
         renderStage.setResizable(false);
-        renderStage.show();
-
-
-
-        // TODO: create controller to switch scenes
 
         viewPortScene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case R:
                     renderTestScene(renderView);
+                    renderStage.show();
                     break;
             }
         });
