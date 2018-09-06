@@ -3,7 +3,8 @@ package gui;
 
 import engine.RayTracer;
 import engine.models.SceneData;
-import engine.models.components.*;
+import engine.models.components.Camera;
+import engine.models.components.Material;
 import engine.models.components.geometry.Sphere;
 import engine.models.components.lights.DirectionalLight;
 import engine.models.components.lights.Light;
@@ -12,34 +13,55 @@ import engine.util.Options;
 import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception{
         SceneData sceneData = getSampleSceneData();
 
         ViewPort viewPort = new ViewPort();
-        primaryStage.setTitle("raytracer");
-        primaryStage.setScene(viewPort.createViewPortScene(sceneData));
-        primaryStage.show();
+        RenderView renderView = new RenderView();
 
-        renderTestScene(viewPort);
+        primaryStage.setTitle("raytracer");
+        Scene viewPortScene = viewPort.getViewPortScene(sceneData);
+        Scene renderViewScene = renderView.getRenderViewScene();
+        primaryStage.setScene(viewPortScene);
 
         primaryStage.setHeight(Options.IMAGE_HEIGHT);
         primaryStage.setWidth(Options.IMAGE_WIDTH);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+        // TODO: create controller to switch scenes
+        viewPortScene.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case R:
+                    primaryStage.setScene(renderViewScene);
+                    renderTestScene(renderView);break;
+            }
+        });
+
+        renderViewScene.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case I:
+                    primaryStage.setScene(viewPortScene);
+            }
+        });
+
     }
 
-    private void renderTestScene(ViewPort viewPort) {
+    private void renderTestScene(RenderView renderView) {
         SceneData sceneData = getSampleSceneData();
         RayTracer rayTracer = new RayTracer(sceneData);
-        viewPort.render(rayTracer.render());}
+        renderView.drawImage(rayTracer.render());}
 
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
-        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
+        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 120);
         Sphere sphere = new Sphere(new Vector3D(-10, 0, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
         Sphere sphere2 = new Sphere(new Vector3D(2, 0, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
 

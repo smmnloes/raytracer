@@ -24,19 +24,19 @@ public class RayTracer {
         for (int y = 0; y < IMAGE_HEIGHT; y++) {
             for (int x = 0; x < IMAGE_WIDTH; x++) {
                 double fov = sceneData.camera.fov;
-                double scale = Math.tan(fov / 2 * Math.PI / 180);
+                double scale = Math.tan(fov / 2d * Math.PI / 180d);
 
 
                 double Px, Py;
 
                 if (IMAGE_WIDTH >= IMAGE_HEIGHT) {
-                    double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width > height
-                    Px = (2 * ((x + 0.5) / IMAGE_WIDTH) - 1) * scale * imageAspectRatio;
-                    Py = (1 - 2 * ((y + 0.5) / IMAGE_HEIGHT) * scale);
+                    double imageAspectRatio =  (double)IMAGE_WIDTH / (double)IMAGE_HEIGHT; // assuming width > height
+                    Px = (2d * (x + 0.5d) / (double)IMAGE_WIDTH - 1d) * scale * imageAspectRatio;
+                    Py = (1d - 2d * (y + 0.5d) / (double)IMAGE_HEIGHT) * scale;
                 } else {
-                    double imageAspectRatio = (double) IMAGE_HEIGHT / (double) IMAGE_WIDTH; // assuming width < height
-                    Px = (2 * ((x + 0.5) / IMAGE_WIDTH) - 1) * scale;
-                    Py = (1 - 2 * ((y + 0.5) / IMAGE_HEIGHT) * scale * imageAspectRatio);
+                    double imageAspectRatio = (double)IMAGE_WIDTH / (double)IMAGE_HEIGHT; // assuming width < height
+                    Px = (2d * ((x + 0.5d) / (double)IMAGE_WIDTH) - 1d) * scale * imageAspectRatio;
+                    Py = (1d - 2d * (y + 0.5d) / (double)IMAGE_HEIGHT) * scale;
                 }
 
                 // TODO: add support for camera movement

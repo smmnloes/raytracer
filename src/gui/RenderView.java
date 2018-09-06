@@ -1,10 +1,13 @@
 package gui;
 
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
-public class RenderView extends ImageView {
+public class RenderView {
+    ImageView imageView;
 
     public void drawImage(int[][] imageBuffer) {
         int width = imageBuffer[0].length;
@@ -20,7 +23,15 @@ public class RenderView extends ImageView {
             }
         }
 
-        this.setImage(writableImage);
+        this.imageView.setImage(writableImage);
+    }
+
+    public Scene getRenderViewScene () {
+        Group group = new Group();
+        imageView = new ImageView();
+        group.getChildren().add(imageView);
+        return new Scene(group);
+
     }
 
 }
