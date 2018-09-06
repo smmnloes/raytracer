@@ -7,7 +7,7 @@ import engine.util.Vector3D;
 
 
 public class Sphere extends Geometry {
-    private double radius;
+    public double radius;
 
     public Sphere(Vector3D position, Vector3D rotation, Vector3D scale, double radius, Material material) {
         super(position, rotation, scale, material);

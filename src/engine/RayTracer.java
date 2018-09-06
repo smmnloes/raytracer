@@ -41,8 +41,8 @@ public class RayTracer {
 
                 // TODO: add support for camera movement
                 Vector3D rayOrigin = new Vector3D(0, 0, 0);
-                Vector3D rayDirection = new Vector3D(Px, Py, -1).minus(rayOrigin); // note that this just equal to Vec3f(Px, Py, -1);
-                rayDirection.normalize(); // it's a rotation so don't forget to normalize
+                Vector3D rayDirection = new Vector3D(Px, Py, 1).minus(rayOrigin); // note that this just equal to Vec3f(Px, Py, -1);
+                rayDirection.normalize(); // it's a direction so don't forget to normalize
 
                 imageBuffer[y][x] = trace(new Ray(rayOrigin, rayDirection)).toInt();
             }
