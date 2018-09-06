@@ -64,7 +64,7 @@ public class ViewPort {
             if (light instanceof DirectionalLight) {
                 DirectionalLight renderLight = (DirectionalLight) light;
                 javafx.scene.PointLight viewPortLight = new javafx.scene.PointLight(light.toJavaFXLightColor());
-                viewPortLight.getTransforms().add(new Translate(-renderLight.direction.x * 1000, renderLight.direction.y * 1000, -renderLight.direction.z * 1000));
+                viewPortLight.getTransforms().add(new Translate(-renderLight.direction.x * 10000, renderLight.direction.y * 10000, -renderLight.direction.z * 10000));
                 interactiveView.getChildren().add(viewPortLight);
             }
         }
