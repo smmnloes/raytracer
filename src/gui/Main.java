@@ -18,46 +18,48 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         SceneData sceneData = getSampleSceneData();
 
         ViewPort viewPort = new ViewPort();
-        RenderView renderView = new RenderView();
-
-        primaryStage.setTitle("raytracer");
+        primaryStage.setTitle("Viewport");
         Scene viewPortScene = viewPort.getViewPortScene(sceneData);
-        Scene renderViewScene = renderView.getRenderViewScene();
         primaryStage.setScene(viewPortScene);
-
         primaryStage.setHeight(Options.IMAGE_HEIGHT);
         primaryStage.setWidth(Options.IMAGE_WIDTH);
         primaryStage.setResizable(false);
+
         primaryStage.show();
 
+        Stage renderStage = new Stage();
+        RenderView renderView = new RenderView();
+        renderStage.setTitle("Rendered Image");
+        Scene renderViewScene = renderView.getRenderViewScene();
+        renderStage.setScene(renderViewScene);
+        renderStage.setHeight(Options.IMAGE_HEIGHT);
+        renderStage.setWidth(Options.IMAGE_WIDTH);
+        renderStage.setResizable(false);
+        renderStage.show();
+
+
+
         // TODO: create controller to switch scenes
+
         viewPortScene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case R:
-                    primaryStage.setScene(renderViewScene);
-                    renderTestScene(renderView);break;
+                    renderTestScene(renderView);
+                    break;
             }
         });
-
-        renderViewScene.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case I:
-                    primaryStage.setScene(viewPortScene);
-            }
-        });
-
     }
 
     private void renderTestScene(RenderView renderView) {
         SceneData sceneData = getSampleSceneData();
         RayTracer rayTracer = new RayTracer(sceneData);
-        renderView.drawImage(rayTracer.render());}
+        renderView.drawImage(rayTracer.render());
+    }
 
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();

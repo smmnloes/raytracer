@@ -5,7 +5,7 @@ import engine.util.RGBColor;
 import engine.util.Vector3D;
 
 public class PointLight extends Light {
-    private static final int INTENSITY_MUTLIPLIER = 1000;
+    private static final int INTENSITY_MUTLIPLIER = 1500;
 
     public PointLight(Vector3D position, double intensity, RGBColor color) {
         super(position, intensity, color);

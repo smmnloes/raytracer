@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 public abstract class Light {
     public Vector3D position;
     public double intensity;
-    // Viewport only allows intensity up to 1.0, not enough for rendered image
     public RGBColor color;
 
     public Light(Vector3D position, double intensity, RGBColor color) {
