@@ -9,7 +9,6 @@ import engine.models.components.geometry.Sphere;
 import engine.models.components.lights.DirectionalLight;
 import engine.models.components.lights.Light;
 import engine.models.components.lights.PointLight;
-import engine.util.Options;
 import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
@@ -26,8 +25,8 @@ public class Main extends Application {
         primaryStage.setTitle("Viewport");
         Scene viewPortScene = viewPort.getViewPortScene(sceneData);
         primaryStage.setScene(viewPortScene);
-        primaryStage.setHeight(Options.IMAGE_HEIGHT);
-        primaryStage.setWidth(Options.IMAGE_WIDTH);
+        primaryStage.setHeight(sceneData.sceneOptions.IMAGE_HEIGHT);
+        primaryStage.setWidth(sceneData.sceneOptions.IMAGE_WIDTH);
         primaryStage.setResizable(false);
 
         primaryStage.show();
@@ -37,8 +36,8 @@ public class Main extends Application {
         renderStage.setTitle("Rendered Image");
         Scene renderViewScene = renderView.getRenderViewScene();
         renderStage.setScene(renderViewScene);
-        renderStage.setHeight(Options.IMAGE_HEIGHT);
-        renderStage.setWidth(Options.IMAGE_WIDTH);
+        renderStage.setHeight(sceneData.sceneOptions.IMAGE_HEIGHT);
+        renderStage.setWidth(sceneData.sceneOptions.IMAGE_WIDTH);
         renderStage.setResizable(false);
 
         viewPortScene.setOnKeyPressed(event -> {
@@ -59,6 +58,7 @@ public class Main extends Application {
 
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
+
         sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
         Sphere sphere = new Sphere(new Vector3D(-10, 2, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
         Sphere sphere2 = new Sphere(new Vector3D(2, 1, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));

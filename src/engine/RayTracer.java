@@ -3,18 +3,24 @@ package engine;
 import engine.models.SceneData;
 import engine.models.components.geometry.Geometry;
 import engine.models.components.lights.Light;
-import engine.util.*;
+import engine.util.Intersection;
+import engine.util.RGBColor;
+import engine.util.Ray;
+import engine.util.Vector3D;
 
 public class RayTracer {
-    private static final int IMAGE_HEIGHT = Options.IMAGE_HEIGHT;
-    private static final int IMAGE_WIDTH = Options.IMAGE_WIDTH;
+    private final int IMAGE_HEIGHT;
+    private final int IMAGE_WIDTH;
 
     private final SceneData sceneData;
 
-    private final RGBColor BACKGROUND_COLOR = Options.BACKGROUND_COLOR;
+    private final RGBColor BACKGROUND_COLOR;
 
     public RayTracer(SceneData sceneData) {
         this.sceneData = sceneData;
+        IMAGE_WIDTH = sceneData.sceneOptions.IMAGE_WIDTH;
+        IMAGE_HEIGHT = sceneData.sceneOptions.IMAGE_HEIGHT;
+        BACKGROUND_COLOR = sceneData.sceneOptions.BACKGROUND_COLOR;
     }
 
 

@@ -15,12 +15,11 @@ import javafx.scene.transform.Translate;
 
 public class ViewPort {
     private PerspectiveCamera camera;
-    private Scene scene;
 
 
     public Scene getViewPortScene(SceneData sceneData) {
         Parent content = createContent(sceneData);
-        scene = new Scene(content);
+        Scene scene = new Scene(content);
         scene.setCamera(camera);
         return scene;
     }
