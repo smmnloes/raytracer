@@ -13,6 +13,7 @@ import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 
@@ -43,15 +44,35 @@ public class Main extends Application {
         viewPortScene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case R:
-                    renderTestScene(renderView);
+                    renderTestScene(renderView, sceneData);
                     renderStage.show();
+                    break;
+                case UP:
+                    sceneData.camera.position.y += 1;
+                    viewPortScene.getCamera().getTransforms().add(new Translate(0, -1, 0));
+                    break;
+                case DOWN:
+                    sceneData.camera.position.y -= 1;
+
+                    viewPortScene.getCamera().getTransforms().add(new Translate(0, 1, 0));
+                    break;
+
+                case LEFT:
+                    sceneData.camera.position.x += -1;
+
+                    viewPortScene.getCamera().getTransforms().add(new Translate(-1, 0, 0));
+                    break;
+
+                case RIGHT:
+                    sceneData.camera.position.x += 1;
+
+                    viewPortScene.getCamera().getTransforms().add(new Translate(1, 0, 0));
                     break;
             }
         });
     }
 
-    private void renderTestScene(RenderView renderView) {
-        SceneData sceneData = getSampleSceneData();
+    private void renderTestScene(RenderView renderView, SceneData sceneData) {
         RayTracer rayTracer = new RayTracer(sceneData);
         renderView.drawImage(rayTracer.render());
     }
@@ -59,7 +80,7 @@ public class Main extends Application {
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
 
-        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0.5, 0), 90);
+        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
         Sphere sphere = new Sphere(new Vector3D(-10, 2, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
         Sphere sphere2 = new Sphere(new Vector3D(2, 1, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
 

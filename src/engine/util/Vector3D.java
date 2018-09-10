@@ -99,6 +99,8 @@ public class Vector3D {
     }
 
     public static double[][] createToWorldMatrix(Vector3D translation, Vector3D rotation, Vector3D scale) {
+        rotation = new Vector3D(toRadians(rotation.x), toRadians(rotation.y), toRadians(rotation.z));
+
         double[][] rotX = new double[][]
                 {
                         {1, 0, 0, 0},
