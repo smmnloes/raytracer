@@ -88,7 +88,7 @@ public class Vector3D {
                 double cellResult = 0;
                 // k = rows in second matrix
                 for (int k = 0; k < matrix2.length; k++) {
-                    cellResult += matrix1[i][j] * matrix2[j][k];
+                    cellResult += matrix1[i][k] * matrix2[k][j];
                 }
                 result[i][j] = cellResult;
             }
@@ -126,7 +126,7 @@ public class Vector3D {
         double[][] sca = new double[][]{
                 {scale.x, 0, 0, 0},
                 {0, scale.y, 0, 0},
-                {0, 0, scale.z, 0, 0},
+                {0, 0, scale.z, 0},
                 {0, 0, 0, 1}
         };
 
@@ -137,7 +137,7 @@ public class Vector3D {
                 {0, 0, 0, 1}
         };
 
-        return matrixMatrixMult(translate, matrixMatrixMult(rotX, matrixMatrixMult(rotY, matrixMatrixMult(rotZ, sca))));
+        return matrixMatrixMult(rotX, matrixMatrixMult(rotY, matrixMatrixMult(rotZ, matrixMatrixMult(sca, translate))));
 
     }
 

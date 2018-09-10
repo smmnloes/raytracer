@@ -55,9 +55,7 @@ public class RayTracer {
                 }
 
                 Vector3D rayDirection = Vector3D.matrixVectMult(toWorld, new Vector3D(Px, Py, 1));
-
                 rayDirection = rayDirection.minus(rayOrigin);
-
                 rayDirection.normalize(); // it's a direction so don't forget to normalize
 
                 imageBuffer[y][x] = trace(new Ray(rayOrigin, rayDirection)).toInt();
