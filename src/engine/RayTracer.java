@@ -29,7 +29,7 @@ public class RayTracer {
         int[][] imageBuffer = new int[IMAGE_HEIGHT][IMAGE_WIDTH];
         Camera camera = sceneData.camera;
 
-        double[][] toWorld = camera.toWorld;
+        double[][] toWorld = camera.calculateToWorld();
 
 
         Vector3D rayOrigin = Vector3D.matrixVectMult(toWorld, new Vector3D(0, 0, 0));

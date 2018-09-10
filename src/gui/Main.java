@@ -13,6 +13,7 @@ import engine.util.RGBColor;
 import engine.util.Vector3D;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
@@ -68,6 +69,47 @@ public class Main extends Application {
 
                     viewPortScene.getCamera().getTransforms().add(new Translate(1, 0, 0));
                     break;
+
+                case I:
+                    sceneData.camera.position.z += 1;
+
+                    viewPortScene.getCamera().getTransforms().add(new Translate(0, 0, 1));
+                    break;
+
+                case K:
+                    sceneData.camera.position.z -= 1;
+
+                    viewPortScene.getCamera().getTransforms().add(new Translate(0, 0, -1));
+                    break;
+                case W:
+                    sceneData.camera.rotation.x += 5;
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(5, Rotate.X_AXIS));
+                    break;
+                case S:
+                    sceneData.camera.rotation.x -= 5;
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(-5, Rotate.X_AXIS));
+                    break;
+                case A:
+                    sceneData.camera.rotation.y -= 5;
+
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(-5, Rotate.Y_AXIS));
+                    break;
+
+                case D:
+                    sceneData.camera.rotation.y += 5;
+
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(5, Rotate.Y_AXIS));
+                    break;
+                case Q:
+                    sceneData.camera.rotation.z -= 5;
+
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(-5, Rotate.Z_AXIS));
+                    break;
+                case E:
+                    sceneData.camera.rotation.z += 5;
+
+                    viewPortScene.getCamera().getTransforms().add(new Rotate(5, Rotate.Z_AXIS));
+                    break;
             }
         });
     }
@@ -80,7 +122,7 @@ public class Main extends Application {
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
 
-        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
+        sceneData.camera = new Camera(new Vector3D(0, 3, 0), new Vector3D(0, 0, 0), 90);
         Sphere sphere = new Sphere(new Vector3D(-10, 2, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
         Sphere sphere2 = new Sphere(new Vector3D(2, 1, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
 
