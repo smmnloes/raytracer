@@ -42,6 +42,9 @@ public class Main extends Application {
         renderStage.setWidth(sceneData.sceneOptions.IMAGE_WIDTH);
         renderStage.setResizable(false);
 
+        // TODO: Rotation Z,Y is mirrored, need to set pivot?
+
+
         viewPortScene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case R:
