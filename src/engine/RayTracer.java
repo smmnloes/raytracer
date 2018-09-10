@@ -1,6 +1,7 @@
 package engine;
 
 import engine.models.SceneData;
+import engine.models.components.Camera;
 import engine.models.components.geometry.Geometry;
 import engine.models.components.lights.Light;
 import engine.util.Intersection;
@@ -26,10 +27,17 @@ public class RayTracer {
 
     public int[][] render() {
         int[][] imageBuffer = new int[IMAGE_HEIGHT][IMAGE_WIDTH];
+        Camera camera = sceneData.camera;
+
+        double[][] toWorld = camera.toWorld;
+
+
+        Vector3D rayOrigin = Vector3D.matrixVectMult(toWorld, new Vector3D(0, 0, 0));
+
 
         for (int y = 0; y < IMAGE_HEIGHT; y++) {
             for (int x = 0; x < IMAGE_WIDTH; x++) {
-                double fov = sceneData.camera.fov;
+                double fov = camera.fov;
                 double scale = Math.tan(fov / 2d * Math.PI / 180d);
 
 
@@ -37,18 +45,17 @@ public class RayTracer {
 
                 // invert Py because in viewport y axis points down
                 if (IMAGE_WIDTH >= IMAGE_HEIGHT) {
-                    double imageAspectRatio =  (double)IMAGE_WIDTH / (double)IMAGE_HEIGHT; // assuming width > height
-                    Px = (2d * (x + 0.5d) / (double)IMAGE_WIDTH - 1d) * scale * imageAspectRatio;
-                    Py = (1d - 2d * (y + 0.5d) / (double)IMAGE_HEIGHT) * scale;
+                    double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width > height
+                    Px = (2d * (x + 0.5d) / (double) IMAGE_WIDTH - 1d) * scale * imageAspectRatio;
+                    Py = (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
                 } else {
-                    double imageAspectRatio = (double)IMAGE_WIDTH / (double)IMAGE_HEIGHT; // assuming width < height
-                    Px = (2d * ((x + 0.5d) / (double)IMAGE_WIDTH) - 1d) * scale * imageAspectRatio;
-                    Py = (1d - 2d * (y + 0.5d) / (double)IMAGE_HEIGHT) * scale;
+                    double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width < height
+                    Px = (2d * ((x + 0.5d) / (double) IMAGE_WIDTH) - 1d) * scale * imageAspectRatio;
+                    Py = (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
                 }
 
-                // TODO: add support for camera movement
-                Vector3D rayOrigin = new Vector3D(0, 0, 0);
-                Vector3D rayDirection = new Vector3D(Px, Py, 1).minus(rayOrigin); // note that this just equal to Vec3f(Px, Py, -1);
+                Vector3D rayDirection = Vector3D.matrixVectMult(toWorld, new Vector3D(Px, Py, 1));
+
                 rayDirection.normalize(); // it's a direction so don't forget to normalize
 
                 imageBuffer[y][x] = trace(new Ray(rayOrigin, rayDirection)).toInt();

@@ -59,7 +59,7 @@ public class Main extends Application {
     private static SceneData getSampleSceneData() {
         SceneData sceneData = new SceneData();
 
-        sceneData.camera = new Camera(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 90);
+        sceneData.camera = new Camera(new Vector3D(-1, 0, 0), new Vector3D(0, 0, 0), 90);
         Sphere sphere = new Sphere(new Vector3D(-10, 2, 12), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
         Sphere sphere2 = new Sphere(new Vector3D(2, 1, 10), new Vector3D(0, 0, 0), new Vector3D(1, 1, 1), 4, new Material(RGBColor.white()));
 

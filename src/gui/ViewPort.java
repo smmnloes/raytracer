@@ -1,6 +1,7 @@
 package gui;
 
 import engine.models.SceneData;
+import engine.models.components.Camera;
 import engine.models.components.geometry.Geometry;
 import engine.models.components.geometry.Sphere;
 import engine.models.components.lights.DirectionalLight;
@@ -14,13 +15,13 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 public class ViewPort {
-    private PerspectiveCamera camera;
+    private PerspectiveCamera viewPortCamera;
 
 
     public Scene getViewPortScene(SceneData sceneData) {
         Parent content = createContent(sceneData);
         Scene scene = new Scene(content);
-        scene.setCamera(camera);
+        scene.setCamera(viewPortCamera);
         return scene;
     }
 
@@ -31,16 +32,20 @@ public class ViewPort {
     private Parent createContent(SceneData sceneData) {
         Group interactiveView = new Group();
 
-        camera = new PerspectiveCamera(true);
+        viewPortCamera = new PerspectiveCamera(true);
 
 
-        camera.getTransforms().addAll(
-                new Rotate(sceneData.camera.rotation.y, Rotate.Y_AXIS),
-                new Rotate(sceneData.camera.rotation.x, Rotate.X_AXIS),
-                new Rotate(sceneData.camera.rotation.z, Rotate.Z_AXIS)
+        Camera renderCamera = sceneData.camera;
+
+        viewPortCamera.getTransforms().addAll(
+                new Rotate(renderCamera.rotation.y, Rotate.Y_AXIS),
+                new Rotate(renderCamera.rotation.x, Rotate.X_AXIS),
+                new Rotate(renderCamera.rotation.z, Rotate.Z_AXIS),
+                new Translate(renderCamera.position.x, -renderCamera.position.y, renderCamera.position.z)
         );
-        camera.setFieldOfView(sceneData.camera.fov);
-        interactiveView.getChildren().add(camera);
+
+        viewPortCamera.setFieldOfView(renderCamera.fov);
+        interactiveView.getChildren().add(viewPortCamera);
 
         for (Geometry geometry : sceneData.geometries) {
             if (geometry instanceof Sphere) {
