@@ -52,11 +52,11 @@ public class Main extends Application {
                     renderStage.show();
                     break;
                 case UP:
-                    sceneData.camera.position.y += 1;
+                    sceneData.camera.position.y -= 1;
                     viewPortScene.getCamera().getTransforms().add(new Translate(0, -1, 0));
                     break;
                 case DOWN:
-                    sceneData.camera.position.y -= 1;
+                    sceneData.camera.position.y += 1;
 
                     viewPortScene.getCamera().getTransforms().add(new Translate(0, 1, 0));
                     break;

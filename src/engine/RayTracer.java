@@ -47,11 +47,11 @@ public class RayTracer {
                 if (IMAGE_WIDTH >= IMAGE_HEIGHT) {
                     double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width > height
                     Px = (2d * (x + 0.5d) / (double) IMAGE_WIDTH - 1d) * scale * imageAspectRatio;
-                    Py = (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
+                    Py = - (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
                 } else {
                     double imageAspectRatio = (double) IMAGE_WIDTH / (double) IMAGE_HEIGHT; // assuming width < height
                     Px = (2d * ((x + 0.5d) / (double) IMAGE_WIDTH) - 1d) * scale * imageAspectRatio;
-                    Py = (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
+                    Py = - (1d - 2d * (y + 0.5d) / (double) IMAGE_HEIGHT) * scale;
                 }
 
                 Vector3D rayDirection = Vector3D.matrixVectMult(toWorld, new Vector3D(Px, Py, 1));
