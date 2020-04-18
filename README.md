@@ -1,2 +1,3 @@
 # rayTracer
-Mutlithreading enabled rayTracer
+A raytracer written in Java, with a GUI made in JavaFX.
+Work in progress...
